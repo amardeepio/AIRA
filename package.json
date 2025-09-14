@@ -1,0 +1,25 @@
+{
+  "name": "aira",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "contracts",
+    "backend"
+  ],
+  "scripts": {
+    "compile": "hardhat compile --tsconfig tsconfig.hardhat.json",
+    "clean": "hardhat clean",
+    "dev": "concurrently \"npm:dev --workspace=frontend\" \"npm:start:dev --workspace=backend\""
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/hardhat-upgrades": "^3.1.0",
+    "concurrently": "^9.2.1",
+    "hardhat": "^2.26.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.3",
+    "@openzeppelin/contracts-upgradeable": "^4.9.3",
+    "dotenv": "^17.2.2"
+  }
+}

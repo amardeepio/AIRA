@@ -24,8 +24,8 @@ export default function Home() {
   useEffect(() => {
     let vantaEffect: any;
     const initializeVanta = () => {
-      if (vantaRef.current && typeof window !== 'undefined' && window.VANTA) {
-        vantaEffect = window.VANTA.WAVES({
+      if (vantaRef.current && typeof window !== 'undefined' && (window as any).VANTA) {
+        vantaEffect = (window as any).VANTA.WAVES({
           el: vantaRef.current,
           mouseControls: true,
           touchControls: true,

@@ -68,7 +68,8 @@ export default function ListPropertyPage() {
     try {
       // Step 1: Upload image to IPFS via backend
       setStatus({ type: 'success', message: 'Uploading image to IPFS...' });
-      const response = await fetch('http://localhost:3001/api/properties/upload', {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/properties/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -142,7 +143,9 @@ export default function ListPropertyPage() {
           });
 
           // Step 5: Add property to the database
-          await fetch('http://localhost:3001/api/properties/add', {
+                    // Step 5: Add property to the database
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+          await fetch(`${apiUrl}/api/properties/add`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

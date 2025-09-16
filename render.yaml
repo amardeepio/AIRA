@@ -1,0 +1,29 @@
+services:
+  # Backend Service (NestJS)
+  - type: web
+    name: aira-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm run start:prod"
+    envVars:
+      - key: NODE_VERSION
+        value: "20.11.0"
+      - key: PINATA_JWT
+        sync: false # Do not sync this value from the Render dashboard
+
+  # Frontend Service (Next.js)
+  - type: web
+    name: aira-frontend
+    runtime: node
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm run start"
+    envVars:
+      - key: NODE_VERSION
+        value: "20.11.0"
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: aira-backend
+          property: url

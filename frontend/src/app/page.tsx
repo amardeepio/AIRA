@@ -12,7 +12,7 @@ import {
   Database,
   Lock,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 declare const VANTA: any;
@@ -50,7 +50,7 @@ export default function Home() {
   }, []);
 
   // Animation variants
-  const fadeInUp = {
+    const fadeInUp: Variants = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
     transition: { duration: 0.8, ease: "easeInOut" },

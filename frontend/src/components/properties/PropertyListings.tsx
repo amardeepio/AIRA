@@ -24,10 +24,13 @@ export function PropertyListings({ properties }: PropertyListingsProps) {
     if (!Array.isArray(properties)) {
       return [];
     }
-    let filtered = [...properties].filter(p =>
-      p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      p.location.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filtered = [...properties].filter(p => {
+      if (!p || !p.name || !p.location) {
+        return false;
+      }
+      return p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+             p.location.toLowerCase().includes(searchTerm.toLowerCase());
+    });
 
     switch (sortOrder) {
       case 'price_asc':

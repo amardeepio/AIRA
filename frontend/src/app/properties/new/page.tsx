@@ -16,7 +16,7 @@ import { DollarSign, Home, Hash, MapPin, Image as ImageIcon, CheckCircle, AlertT
 import Link from 'next/link';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { marketplaceAddress, marketplaceAbi, propertyTokenAddress, propertyTokenAbi } from '@/lib/contracts';
-import { parseEther, decodeEventLog } from 'viem';
+import { parseEther, decodeEventLog, Log } from 'viem';
 
 export default function ListPropertyPage() {
   const [propertyName, setPropertyName] = useState('');
@@ -68,7 +68,8 @@ export default function ListPropertyPage() {
     try {
       // Step 1: Upload image to IPFS via backend
       setStatus({ type: 'success', message: 'Uploading image to IPFS...' });
-      const response = await fetch('http://localhost:3001/api/properties/upload', {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/properties/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -103,7 +104,7 @@ export default function ListPropertyPage() {
   useEffect(() => {
     if (receipt && ipfsHash) {
       const transferSingleLog = receipt.logs.find(
-        (log: any) => log.topics[0] === '0xc3d58168c5ae7397731d063d5bbf3d657854427343f4c083240f7aacaa2d0f62' // TransferSingle signature
+        (log: Log) => log.topics[0] === '0xc3d58168c5ae7397731d063d5bbf3d657854427343f4c083240f7aacaa2d0f62' // TransferSingle signature
       );
 
       if (!transferSingleLog) {
@@ -118,7 +119,7 @@ export default function ListPropertyPage() {
         data: transferSingleLog.data,
         topics: transferSingleLog.topics,
       });
-      const tokenId = (event.args as { id: bigint }).id;
+      const tokenId = (event.args as unknown as { id: bigint }).id;
 
       const listProperty = async () => {
         try {
@@ -142,7 +143,9 @@ export default function ListPropertyPage() {
           });
 
           // Step 5: Add property to the database
-          await fetch('http://localhost:3001/api/properties/add', {
+                    // Step 5: Add property to the database
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+          await fetch(`${apiUrl}/api/properties/add`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

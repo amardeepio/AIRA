@@ -11,7 +11,8 @@ export default function PropertiesPage() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/properties");
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+        const response = await fetch(`${apiUrl}/api/properties`);
         const data = await response.json();
         setProperties(data);
       } catch (error) {

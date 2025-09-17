@@ -16,7 +16,7 @@ import { DollarSign, Home, Hash, MapPin, Image as ImageIcon, CheckCircle, AlertT
 import Link from 'next/link';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { marketplaceAddress, marketplaceAbi, propertyTokenAddress, propertyTokenAbi } from '@/lib/contracts';
-import { parseEther, decodeEventLog } from 'viem';
+import { parseEther, decodeEventLog, Log } from 'viem';
 
 export default function ListPropertyPage() {
   const [propertyName, setPropertyName] = useState('');
@@ -104,7 +104,7 @@ export default function ListPropertyPage() {
   useEffect(() => {
     if (receipt && ipfsHash) {
       const transferSingleLog = receipt.logs.find(
-        (log: any) => log.topics[0] === '0xc3d58168c5ae7397731d063d5bbf3d657854427343f4c083240f7aacaa2d0f62' // TransferSingle signature
+        (log: Log) => log.topics[0] === '0xc3d58168c5ae7397731d063d5bbf3d657854427343f4c083240f7aacaa2d0f62' // TransferSingle signature
       );
 
       if (!transferSingleLog) {

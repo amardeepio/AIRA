@@ -15,17 +15,25 @@ import {
 import { motion, type Variants } from "framer-motion";
 import { useEffect, useRef } from "react";
 
-declare const VANTA: any;
+interface VantaEffect {
+  destroy: () => void;
+}
+
+interface WindowWithVanta extends Window {
+  VANTA: {
+    WAVES: (options: Record<string, unknown>) => VantaEffect;
+  };
+}
 
 export default function Home() {
   const featuredProperties = properties.slice(0, 3);
   const vantaRef = useRef(null);
 
   useEffect(() => {
-    let vantaEffect: any;
+    let vantaEffect: VantaEffect | null = null;
     const initializeVanta = () => {
-      if (vantaRef.current && typeof window !== 'undefined' && (window as any).VANTA) {
-        vantaEffect = (window as any).VANTA.WAVES({
+      if (vantaRef.current && typeof window !== 'undefined' && (window as unknown as WindowWithVanta).VANTA) {
+        vantaEffect = (window as unknown as WindowWithVanta).VANTA.WAVES({
           el: vantaRef.current,
           mouseControls: true,
           touchControls: true,

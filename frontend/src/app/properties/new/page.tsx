@@ -119,7 +119,7 @@ export default function ListPropertyPage() {
         data: transferSingleLog.data,
         topics: transferSingleLog.topics,
       });
-      const tokenId = (event.args as { id: bigint }).id;
+      const tokenId = (event.args as unknown as { id: bigint }).id;
 
       const listProperty = async () => {
         try {

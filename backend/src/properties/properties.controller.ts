@@ -1,8 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  UploadedFile,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PropertiesService } from './properties.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
+import type {
+  Property,
+  UploadResponse,
+  AddPropertyResponse,
+} from './entities/property.entity';
 
 @Controller('properties')
 export class PropertiesController {
@@ -10,32 +25,49 @@ export class PropertiesController {
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('image'))
-  uploadToIpfs(@UploadedFile() file: Express.Multer.File, @Body() createPropertyDto: CreatePropertyDto) {
+  async uploadToIpfs(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() createPropertyDto: CreatePropertyDto,
+  ): Promise<UploadResponse> {
     return this.propertiesService.uploadToIpfs(createPropertyDto, file);
   }
 
   @Post('add')
-  add(@Body() { createPropertyDto, ipfsHash, tokenId }: { createPropertyDto: CreatePropertyDto, ipfsHash: string, tokenId: string }) {
+  add(
+    @Body()
+    {
+      createPropertyDto,
+      ipfsHash,
+      tokenId,
+    }: {
+      createPropertyDto: CreatePropertyDto;
+      ipfsHash: string;
+      tokenId: string;
+    },
+  ): AddPropertyResponse {
     return this.propertiesService.add(createPropertyDto, ipfsHash, tokenId);
   }
 
   @Get()
-  findAll() {
+  findAll(): Property[] {
     return this.propertiesService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.propertiesService.findOne(+id);
+  findOne(@Param('id') id: string): Property | undefined {
+    return this.propertiesService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePropertyDto: UpdatePropertyDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updatePropertyDto: UpdatePropertyDto,
+  ): string {
     return this.propertiesService.update(+id, updatePropertyDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): string {
     return this.propertiesService.remove(+id);
   }
 }

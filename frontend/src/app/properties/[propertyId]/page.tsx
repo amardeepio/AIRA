@@ -1,4 +1,3 @@
-import { properties } from "@/lib/properties-data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
@@ -20,13 +19,39 @@ import {
   ArrowLeft,
 } from "lucide-react";
 
+interface Property {
+  id: string;
+  name: string;
+  location: string;
+  price: string;
+  yield: string;
+  imageUrl: string;
+  description: string;
+  totalShares: number;
+  sharesAvailable: number;
+}
+
 export default async function PropertyDetailPage({
   params,
 }: {
   params: { propertyId: string };
 }) {
   const resolvedParams = await params;
-  const property = properties.find((p) => p.id === resolvedParams.propertyId);
+  
+  // Fetch property data from the backend API
+  let property: Property | null = null;
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+    const response = await fetch(`${apiUrl}/api/properties/${resolvedParams.propertyId}`, { 
+      next: { revalidate: 0 } // Disable caching for fresh data
+    });
+    
+    if (response.ok) {
+      property = await response.json();
+    }
+  } catch (error) {
+    console.error("Error fetching property:", error);
+  }
 
   if (!property) {
     notFound();

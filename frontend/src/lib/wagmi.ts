@@ -1,13 +1,14 @@
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import {
+  mainnet,
+  sepolia,
+  metis,
+  baseSepolia,
+} from 'wagmi/chains';
 
-import { http, createConfig } from "wagmi";
-import { mainnet, sepolia, metis, baseSepolia } from "wagmi/chains";
-
-export const config = createConfig({
+export const config = getDefaultConfig({
+  appName: 'AIRA',
+  projectId: '7c7379cff204bb71180baaa9c14fc930',
   chains: [mainnet, sepolia, metis, baseSepolia],
-  transports: {
-    [mainnet.id]: http(),
-    [sepolia.id]: http(),
-    [metis.id]: http(),
-    [baseSepolia.id]: http(),
-  },
+  ssr: true, // If your dApp uses server side rendering (SSR)
 });

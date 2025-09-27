@@ -90,23 +90,25 @@ export function PropertyListings({ properties }: PropertyListingsProps) {
           <PropertyCard key={property.id} {...property} />
         ))}
       </div>
-      <div className="flex items-center justify-center space-x-4 mt-8">
-        <Button 
-          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </Button>
-        <span className="text-sm text-muted-foreground">
-          Page {currentPage} of {totalPages}
-        </span>
-        <Button 
-          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </Button>
-      </div>
+      {paginatedProperties.length > 0 && totalPages > 1 && (
+        <div className="flex items-center justify-center space-x-4 mt-8">
+            <Button 
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            >
+            Previous
+            </Button>
+            <span className="text-sm text-muted-foreground">
+            Page {currentPage} of {totalPages}
+            </span>
+            <Button 
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            >
+            Next
+            </Button>
+        </div>
+      )}
     </div>
   );
 }

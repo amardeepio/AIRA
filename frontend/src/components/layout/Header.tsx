@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { Building, LayoutDashboard, Menu, X } from "lucide-react";
+import { Building, LayoutDashboard, Menu, X, Bot } from "lucide-react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -41,6 +41,16 @@ export function Header() {
           >
             <LayoutDashboard size={16} />
             Dashboard
+          </Link>
+          <Link
+            href="/advisor"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "flex items-center gap-2"
+            )}
+          >
+            <Bot size={16} />
+            Advisor
           </Link>
           <Link
             href="/properties/new"
@@ -87,6 +97,17 @@ export function Header() {
           >
             <LayoutDashboard size={16} />
             Dashboard
+          </Link>
+          <Link
+            href="/advisor"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "flex items-center gap-2 w-full"
+            )}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <Bot size={16} />
+            Advisor
           </Link>
           <Link
             href="/properties/new"

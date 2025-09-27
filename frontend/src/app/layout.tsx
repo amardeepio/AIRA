@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Providers } from "./providers";
 import Script from "next/script";
+import { ChatWidget } from '@/components/chat/ChatWidget';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main>{children}</main>
+          <ChatWidget />
         </Providers>
         {/* Vanta.js Scripts */}
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" strategy="beforeInteractive" />

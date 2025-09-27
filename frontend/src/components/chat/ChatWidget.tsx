@@ -145,13 +145,13 @@ export function ChatWidget() {
                                 ul: ({node, ...props}) => <ul className="list-disc list-inside my-2" {...props} />,
                                 ol: ({node, ...props}) => <ol className="list-decimal list-inside my-2" {...props} />,
                                 li: ({node, ...props}) => <li className="mb-1" {...props} />,
-                                code: ({node, inline, className, children, ...props}) => {
-                                const match = /language-(\w+)/.exec(className || '')
-                                return !inline && match ? (
-                                    <pre className="bg-gray-800 rounded-md p-2 my-2 text-sm overflow-x-auto"><code className={className} {...props}>{children}</code></pre>
-                                ) : (
-                                    <code className="bg-gray-700 rounded-sm px-1 text-sm" {...props}>{children}</code>
-                                )
+                                pre: (props) => <pre {...props} className="bg-gray-800 rounded-md p-2 my-2 text-sm overflow-x-auto" />,
+                                code: ({node, className, children, ...props}) => {
+                                    const match = /language-(\w+)/.exec(className || '');
+                                    if (match) {
+                                        return <code className={className} {...props}>{children}</code>;
+                                    }
+                                    return <code className="bg-gray-700 rounded-sm px-1 text-sm" {...props}>{children}</code>;
                                 },
                             }}
                             >

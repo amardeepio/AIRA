@@ -23,14 +23,19 @@
     "@langchain/google-genai": "^0.2.18",
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
+    "@nestjs/jwt": "^11.0.0",
     "@nestjs/mapped-types": "*",
+    "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.1",
     "dotenv": "^16.4.5",
     "json5": "^2.2.3",
     "langchain": "^0.3.34",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
     "pinata-web3": "^0.5.4",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "siwe": "^3.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

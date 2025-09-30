@@ -8,11 +8,13 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  UseGuards,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PropertiesService } from './properties.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import type {
   Property,
   UploadResponse,
@@ -24,6 +26,7 @@ export class PropertiesController {
   constructor(private readonly propertiesService: PropertiesService) {}
 
   @Post('upload')
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('image'))
   async uploadToIpfs(
     @UploadedFile() file: Express.Multer.File,
@@ -33,6 +36,7 @@ export class PropertiesController {
   }
 
   @Post('add')
+  @UseGuards(JwtAuthGuard)
   add(
     @Body()
     {

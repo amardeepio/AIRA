@@ -10,6 +10,8 @@ import JSON5 from 'json5';
 interface AIAdvisorResponse {
   portfolioTitle: string;
   portfolioAnalysis: string;
+  riskScore: 'Low' | 'Medium' | 'High';
+  riskAnalysis: string;
   recommendations: { id: string; reason: string }[];
 }
 
@@ -20,6 +22,8 @@ function isValidAIResponse(obj: unknown): obj is AIAdvisorResponse {
     obj !== null &&
     'portfolioTitle' in obj &&
     'portfolioAnalysis' in obj &&
+    'riskScore' in obj &&
+    'riskAnalysis' in obj &&
     'recommendations' in obj &&
     Array.isArray((obj as AIAdvisorResponse).recommendations) &&
     (obj as AIAdvisorResponse).recommendations.every(
@@ -28,7 +32,8 @@ function isValidAIResponse(obj: unknown): obj is AIAdvisorResponse {
         rec !== null &&
         'id' in rec &&
         'reason' in rec,
-    )
+    ) &&
+    ['Low', 'Medium', 'High'].includes((obj as AIAdvisorResponse).riskScore)
   );
 }
 
@@ -59,6 +64,8 @@ export class AdvisorService {
   async getAdvice(advisorDto: AdvisorDto): Promise<{
     portfolioTitle: string;
     portfolioAnalysis: string;
+    riskScore: 'Low' | 'Medium' | 'High';
+    riskAnalysis: string;
     recommendations: (Property & { reason: string })[];
   }> {
     const { goal, budget } = advisorDto;
@@ -75,6 +82,8 @@ export class AdvisorService {
       return {
         portfolioTitle: 'No Properties Found',
         portfolioAnalysis: `Unfortunately, I couldn't find any properties that match your budget of $${budget.toLocaleString()}. Try increasing your budget to see more options.`,
+        riskScore: 'Low',
+        riskAnalysis: 'No properties found to analyze.',
         recommendations: [],
       };
     }
@@ -101,12 +110,14 @@ export class AdvisorService {
 
         Your instructions for this goal are: "${goalInstructions}"
 
-        Based on your analysis, please provide the following:
-        1. A catchy, one-line 'portfolioTitle' for this recommendation.
-        2. A detailed 'portfolioAnalysis' paragraph (3-4 sentences) explaining the overall strategy and why these properties work well together for the user's goal.
-        3. An array named 'recommendations' containing objects for the top 2 properties. Each object must have an 'id' and a short, one-sentence 'reason' explaining why that specific property was chosen.
+        Based on your analysis, please provide the following in a single, valid JSON object:
+        1. 'portfolioTitle': A catchy, one-line title for this recommendation.
+        2. 'portfolioAnalysis': A detailed paragraph (3-4 sentences) explaining the overall strategy.
+        3. 'riskScore': A risk assessment for this portfolio. Must be one of three string values: "Low", "Medium", or "High".
+        4. 'riskAnalysis': A short, one-sentence explanation for the assigned risk score.
+        5. 'recommendations': An array of objects for the top 2 properties. Each object must have an 'id' and a short, one-sentence 'reason' explaining why that specific property was chosen.
         
-        IMPORTANT: Return ONLY a single, valid JSON object. All keys and string values must be enclosed in double quotes.
+        IMPORTANT: Return ONLY a single, valid JSON object. All keys and string values must be enclosed in double quotes. Do not include any markdown formatting like 
     `;
 
     try {
@@ -119,9 +130,21 @@ export class AdvisorService {
         rawResponse = JSON.stringify(res.content);
       }
 
-      // Clean the response to extract only the JSON part
-      const jsonMatch = rawResponse.match(/```json\n([\s\S]*?)\n```/);
-      const jsonString = jsonMatch ? jsonMatch[1] : rawResponse;
+      // The model can be inconsistent; sometimes it returns markdown, sometimes just the JSON.
+      // This logic attempts to handle both cases gracefully.
+      let jsonString = rawResponse;
+      const markdownMatch = rawResponse.match(/```json\n([\s\S]*?)\n```/);
+
+      if (markdownMatch && markdownMatch[1]) {
+        jsonString = markdownMatch[1];
+      } else {
+        // If no markdown block is found, try to extract the JSON object directly.
+        const firstBrace = rawResponse.indexOf('{');
+        const lastBrace = rawResponse.lastIndexOf('}');
+        if (firstBrace !== -1 && lastBrace > firstBrace) {
+          jsonString = rawResponse.substring(firstBrace, lastBrace + 1);
+        }
+      }
 
       const jsonResponse: unknown = JSON5.parse(jsonString);
 
@@ -140,6 +163,8 @@ export class AdvisorService {
       return {
         portfolioTitle: jsonResponse.portfolioTitle,
         portfolioAnalysis: jsonResponse.portfolioAnalysis,
+        riskScore: jsonResponse.riskScore,
+        riskAnalysis: jsonResponse.riskAnalysis,
         recommendations: recommendedProperties,
       };
     } catch (error) {
@@ -148,6 +173,8 @@ export class AdvisorService {
         portfolioTitle: 'Analysis Error',
         portfolioAnalysis:
           'Sorry, I had trouble analyzing the properties. Please try again.',
+        riskScore: 'Medium',
+        riskAnalysis: 'Could not perform analysis due to an internal error.',
         recommendations: [],
       };
     }

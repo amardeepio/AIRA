@@ -1,5 +1,7 @@
 'use client';
 
+import { AuthGuard } from '@/components/auth/AuthGuard';
+
 import {
   Card,
   CardContent,
@@ -48,8 +50,9 @@ const chartConfig = {
 
 export default function DashboardPage() {
   return (
-    <div className="container mx-auto py-8 space-y-8">
-      <h1 className="text-3xl font-bold">Dashboard</h1>
+    <AuthGuard>
+      <div className="container mx-auto py-8 space-y-8">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -211,6 +214,7 @@ export default function DashboardPage() {
           </Card>
         </div>
       </div>
-    </div>
+      </div>
+    </AuthGuard>
   );
 }

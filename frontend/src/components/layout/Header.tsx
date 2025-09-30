@@ -1,8 +1,9 @@
 'use client';
 
 import Link from "next/link";
-import { Building, LayoutDashboard, Menu, X, Bot } from "lucide-react";
+import { Building, LayoutDashboard, Menu, X, Bot, PlusCircle } from "lucide-react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { AuthButton } from '@/components/auth/AuthButton';
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -59,12 +60,13 @@ export function Header() {
               "flex items-center gap-2"
             )}
           >
+            <PlusCircle size={16} />
             List Property
           </Link>
-          <ConnectButton />
+          <AuthButton />
         </nav>
         <div className="flex items-center gap-4 md:hidden">
-          <ConnectButton />
+          <AuthButton />
           <Button
             variant="outline"
             size="icon"
@@ -117,6 +119,7 @@ export function Header() {
             )}
             onClick={() => setIsMenuOpen(false)}
           >
+            <PlusCircle size={16} />
             List Property
           </Link>
         </nav>

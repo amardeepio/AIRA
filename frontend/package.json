@@ -24,6 +24,7 @@
     "react-dom": "19.1.0",
     "react-markdown": "^10.1.0",
     "recharts": "^2.15.4",
+    "siwe": "^2.3.2",
     "remark-gfm": "^4.0.1",
     "simplex-noise": "^4.0.3",
     "tailwind-merge": "^3.3.1",

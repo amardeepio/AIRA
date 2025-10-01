@@ -9,8 +9,35 @@ import { ChatWidget } from '@/components/chat/ChatWidget';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AIRA - AI-Powered Real Estate Investment",
-  description: "Fractional real estate investing powered by AI.",
+  metadataBase: new URL("https://www.airalabs.xyz"),
+  title: {
+    default: "AIRA - AI-Powered Real Estate Investment",
+    template: "%s | AIRA",
+  },
+  description: "AIRA is a next-generation Real World Asset (RWA) marketplace that makes investing in real estate as simple, liquid, and transparent as trading stocks, powered by AI-driven insights.",
+  keywords: ["real estate", "investing", "fractional ownership", "RWA", "AI", "blockchain", "NFT"],
+  openGraph: {
+    title: "AIRA - AI-Powered Real Estate Investment",
+    description: "The new way to own real estate. Fractional, liquid, and transparent.",
+    url: "https://www.airalabs.xyz",
+    siteName: "AIRA",
+    images: [
+      {
+        url: "/logo/aira.png",
+        width: 512,
+        height: 512,
+        alt: "AIRA Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AIRA - AI-Powered Real Estate Investment",
+    description: "The new way to own real estate. Fractional, liquid, and transparent.",
+    images: ["/logo/aira.png"],
+  },
 };
 
 export default function RootLayout({

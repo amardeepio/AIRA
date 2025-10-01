@@ -1,0 +1,24 @@
+[
+  {
+    "id": "luxury-villa-in-bali",
+    "name": "Luxury Villa in Bali",
+    "description": "A stunning 5-bedroom villa with an infinity pool overlooking the ocean. Fully furnished and ready for rental.",
+    "location": "Bali, Indonesia",
+    "imageUrl": "/properties/bali.png",
+    "totalShares": 10000,
+    "price": "$2,500,000",
+    "yield": "6.8%",
+    "sharesAvailable": 3450
+  },
+  {
+    "id": "penthouse-in-new-york",
+    "name": "Penthouse in New York",
+    "description": "A luxurious penthouse in the heart of Manhattan with breathtaking city views. Features a private rooftop terrace.",
+    "location": "New York, USA",
+    "imageUrl": "/properties/newyork.png",
+    "totalShares": 25000,
+    "price": "$5,000,000",
+    "yield": "4.5%",
+    "sharesAvailable": 11200
+  }
+]

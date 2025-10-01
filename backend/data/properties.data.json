@@ -1,5 +1,28 @@
 [
   {
+
+    "id": "9",
+    "name": "Abu Dhabi Skyline",
+    "description": "4 BHK condo",
+    "location": "Abu Dhabi, UAE",
+    "imageUrl": "https://gateway.pinata.cloud/ipfs/QmSGd4VHTZ7R24i7KCv6qV4FzFsfU5w6ffCmKMpjkvm4g3",
+    "totalShares": 5000,
+    "price": "5,00,000",
+    "yield": "5.0%",
+    "sharesAvailable": 5000
+  },
+  {
+    "id": "8",
+    "name": "Kyoto holiday",
+    "description": "A beautiful 4 bedroom holiday suite ",
+    "location": "Kyoto,Japan",
+    "imageUrl": "https://gateway.pinata.cloud/ipfs/Qmf59AfiXkyFC9m7FpUPhTxyKTHDK48riCUbtwTPR2qAgF",
+    "totalShares": 20000,
+    "price": "2,20,40,000",
+    "yield": "5.0%",
+    "sharesAvailable": 20000
+  },
+  {
     "id": "7",
     "name": "Sobha Pune",
     "description": "4 BHK ",

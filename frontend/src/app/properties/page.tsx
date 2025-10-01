@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { PropertyListings } from "@/components/properties/PropertyListings";
 import { useEffect, useState } from "react";

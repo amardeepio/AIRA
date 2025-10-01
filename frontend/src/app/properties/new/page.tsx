@@ -1,5 +1,7 @@
 'use client';
 
+import { AuthGuard } from '@/components/auth/AuthGuard';
+
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,11 +14,116 @@ import {
 import { Input } from '@/components/ui/input';
 import Textarea from '@/components/ui/textarea';
 import { Progress } from '@/components/ui/progress';
-import { DollarSign, Home, Hash, MapPin, Image as ImageIcon, CheckCircle, AlertTriangle } from 'lucide-react';
+import { DollarSign, Home, Hash, MapPin, Image as ImageIcon, CheckCircle, AlertTriangle, Building } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { marketplaceAddress, marketplaceAbi, propertyTokenAddress, propertyTokenAbi } from '@/lib/contracts';
 import { parseEther, decodeEventLog, Log } from 'viem';
+
+
+const locations = [
+  'Abu Dhabi, UAE',
+  'Accra, Ghana',
+  'Addis Ababa, Ethiopia',
+  'Amsterdam, Netherlands',
+  'Athens, Greece',
+  'Auckland, New Zealand',
+  'Bangalore, India',
+  'Bangkok, Thailand',
+  'Barcelona, Spain',
+  'Beijing, China',
+  'Berlin, Germany',
+  'Bogotá, Colombia',
+  'Boston, USA',
+  'Brasília, Brazil',
+  'Brisbane, Australia',
+  'Brussels, Belgium',
+  'Budapest, Hungary',
+  'Buenos Aires, Argentina',
+  'Cairo, Egypt',
+  'Calgary, Canada',
+  'Cancún, Mexico',
+  'Cape Town, South Africa',
+  'Caracas, Venezuela',
+  'Casablanca, Morocco',
+  'Chennai, India',
+  'Chicago, USA',
+  'Copenhagen, Denmark',
+  'Dakar, Senegal',
+  'Dar es Salaam, Tanzania',
+  'Doha, Qatar',
+  'Dubai, UAE',
+  'Dublin, Ireland',
+  'Edinburgh, United Kingdom',
+  'Frankfurt, Germany',
+  'Geneva, Switzerland',
+  'Guadalajara, Mexico',
+  'Guangzhou, China',
+  'Hamburg, Germany',
+  'Havana, Cuba',
+  'Helsinki, Finland',
+  'Ho Chi Minh City, Vietnam',
+  'Hong Kong, China',
+  'Houston, USA',
+  'Istanbul, Turkey',
+  'Jakarta, Indonesia',
+  'Johannesburg, South Africa',
+  'Kuala Lumpur, Malaysia',
+  'Lagos, Nigeria',
+  'Las Vegas, USA',
+  'Lima, Peru',
+  'Lisbon, Portugal',
+  'London, United Kingdom',
+  'Los Angeles, USA',
+  'Madrid, Spain',
+  'Manchester, United Kingdom',
+  'Manila, Philippines',
+  'Marseille, France',
+  'Melbourne, Australia',
+  'Mexico City, Mexico',
+  'Miami, USA',
+  'Milan, Italy',
+  'Montreal, Canada',
+  'Moscow, Russia',
+  'Mumbai, India',
+  'Munich, Germany',
+  'Nairobi, Kenya',
+  'New Delhi, India',
+  'New York, USA',
+  'Osaka, Japan',
+  'Oslo, Norway',
+  'Panama City, Panama',
+  'Paris, France',
+  'Perth, Australia',
+  'Prague, Czech Republic',
+  'Quito, Ecuador',
+  'Rio de Janeiro, Brazil',
+  'Riyadh, Saudi Arabia',
+  'Rome, Italy',
+  'Saint Petersburg, Russia',
+  'San Francisco, USA',
+  'San José, Costa Rica',
+  'Santiago, Chile',
+  'São Paulo, Brazil',
+  'Seattle, USA',
+  'Seoul, South Korea',
+  'Shanghai, China',
+  'Shenzhen, China',
+  'Singapore',
+  'Stockholm, Sweden',
+  'Sydney, Australia',
+  'Tel Aviv, Israel',
+  'Tokyo, Japan',
+  'Toronto, Canada',
+  'Vancouver, Canada',
+  'Vienna, Austria',
+  'Warsaw, Poland',
+  'Washington D.C., USA',
+  'Wellington, New Zealand',
+  'Zurich, Switzerland',
+];
+
 
 export default function ListPropertyPage() {
   const [propertyName, setPropertyName] = useState('');
@@ -33,6 +140,7 @@ export default function ListPropertyPage() {
   const [ipfsHash, setIpfsHash] = useState<string | null>(null);
 
   const { address } = useAccount();
+  const { token } = useAuth();
   const { writeContractAsync } = useWriteContract();
 
   const { data: receipt, isLoading: isConfirming } = useWaitForTransactionReceipt({ hash: mintHash });
@@ -71,6 +179,9 @@ export default function ListPropertyPage() {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
       const response = await fetch(`${apiUrl}/api/properties/upload`, {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
         body: formData,
       });
 
@@ -143,12 +254,13 @@ export default function ListPropertyPage() {
           });
 
           // Step 5: Add property to the database
-                    // Step 5: Add property to the database
+
           const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
           await fetch(`${apiUrl}/api/properties/add`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify({
               createPropertyDto: {
@@ -186,7 +298,8 @@ export default function ListPropertyPage() {
 
   if (status?.type === 'success' && status.propertyId) {
     return (
-      <div className="container mx-auto py-12">
+      <AuthGuard>
+        <div className="container mx-auto py-12">
         <div className="max-w-3xl mx-auto">
           <Card className="text-center">
             <CardHeader>
@@ -209,16 +322,18 @@ export default function ListPropertyPage() {
             </CardContent>
           </Card>
         </div>
-      </div>
+        </div>
+      </AuthGuard>
     );
   }
 
   return (
-    <div className="container mx-auto py-12">
+    <AuthGuard>
+      <div className="container mx-auto py-12">
       <div className="max-w-3xl mx-auto">
         <Card>
           <CardHeader>
-            <CardTitle className="text-3xl">List Your Property</CardTitle>
+            <CardTitle className="text-3xl flex items-center gap-2"><Building /> List Your Property</CardTitle>
             <CardDescription>
               Fill out the details below to tokenize your property and list it on
               the marketplace.
@@ -259,14 +374,19 @@ export default function ListPropertyPage() {
                   <label htmlFor="location" className="flex items-center gap-2 font-medium">
                     <MapPin size={16} /> Location
                   </label>
-                  <Input
+                  <select
                     id="location"
-                    placeholder="e.g., Miami, FL"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     required
                     disabled={loading}
-                  />
+                    className="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+                  >
+                    <option value="" disabled>Select a city</option>
+                    {locations.map(loc => (
+                      <option key={loc} value={loc}>{loc}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="image" className="flex items-center gap-2 font-medium">
@@ -301,6 +421,20 @@ export default function ListPropertyPage() {
                     required
                     disabled={loading}
                   />
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {[1000, 2000, 5000, 10000].map(amount => (
+                        <Button
+                            key={amount}
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setTotalShares(String(amount))}
+                            disabled={loading}
+                        >
+                            {amount.toLocaleString()}
+                        </Button>
+                    ))}
+                  </div>
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="price" className="flex items-center gap-2 font-medium">
@@ -339,6 +473,7 @@ export default function ListPropertyPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+      </div>
+    </AuthGuard>
   );
 }

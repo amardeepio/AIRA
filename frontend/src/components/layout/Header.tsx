@@ -1,14 +1,8 @@
 'use client';
 
 import Link from "next/link";
-
 import { Building, LayoutDashboard, Menu, X, Bot, PlusCircle } from "lucide-react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { AuthButton } from '@/components/auth/AuthButton';
-
-import { Building, LayoutDashboard, Menu, X } from "lucide-react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -49,7 +43,6 @@ export function Header() {
             Dashboard
           </Link>
           <Link
-
             href="/advisor"
             className={cn(
               buttonVariants({ variant: "outline" }),
@@ -60,14 +53,12 @@ export function Header() {
             Advisor
           </Link>
           <Link
-
             href="/properties/new"
             className={cn(
               buttonVariants({ variant: "outline" }),
               "flex items-center gap-2"
             )}
           >
-
             <PlusCircle size={16} />
             List Property
           </Link>
@@ -75,14 +66,6 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-4 md:hidden">
           <AuthButton />
-
-            List Property
-          </Link>
-          <ConnectButton />
-        </nav>
-        <div className="flex items-center gap-4 md:hidden">
-          <ConnectButton />
-
           <Button
             variant="outline"
             size="icon"
@@ -117,7 +100,6 @@ export function Header() {
             Dashboard
           </Link>
           <Link
-
             href="/advisor"
             className={cn(
               buttonVariants({ variant: "outline" }),
@@ -129,7 +111,6 @@ export function Header() {
             Advisor
           </Link>
           <Link
-
             href="/properties/new"
             className={cn(
               buttonVariants({ variant: "outline" }),
@@ -137,9 +118,7 @@ export function Header() {
             )}
             onClick={() => setIsMenuOpen(false)}
           >
-
             <PlusCircle size={16} />
-
             List Property
           </Link>
         </nav>

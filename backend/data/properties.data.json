@@ -1,5 +1,6 @@
 [
   {
+
     "id": "9",
     "name": "Abu Dhabi Skyline",
     "description": "4 BHK condo",
@@ -120,6 +121,106 @@
     "yield": "5.0%",
     "sharesAvailable": 1000
   },
+  [
+  {
+    "id": "7",
+    "name": "Sobha Pune",
+    "description": "4 BHK ",
+    "location": "Pune,India",
+    "imageUrl": "https://cloudflare-ipfs.com/ipfs/QmXJUxqzo4saRJhoZrAB4ZzyQbBBv4safqPS1Fq6X1mYKZ",
+    "totalShares": 10000,
+    "price": "$20,00,000",
+    "yield": "5.0%",
+    "sharesAvailable": 10000
+  },
+  {
+    "id": "6",
+    "name": "Moscow area",
+    "description": "Beautiful house",
+    "location": "Moscow,Russia",
+    "imageUrl": "https://cloudflare-ipfs.com/ipfs/QmRhyZESdtoi7G8zeq7XrLuZGyXhYgMB5pKQH9wTiFF37r",
+    "totalShares": 3000,
+    "price": "$3,00,000",
+    "yield": "5.0%",
+    "sharesAvailable": 3000
+  },
+  {
+    "id": "5",
+    "name": "Dallas penthouse",
+    "description": "A beautiful house near city center",
+    "location": "Dallas,TX",
+    "imageUrl": "https://cloudflare-ipfs.com/ipfs/QmYa1X37WoX7d1eGf25QWZvSmKy69fAUNKkdgbbr4eZRwQ",
+    "totalShares": 2000,
+    "price": "$2,00,000",
+    "yield": "5.0%",
+    "sharesAvailable": 2000
+  },
+  {
+    "id": "4",
+    "name": "LA Glo Apartment ",
+    "description": "four bedroom house ",
+    "location": "LA, California ",
+    "imageUrl": "https://cloudflare-ipfs.com/ipfs/QmahFLQMbDnK6HxdiSvKa8xaDD1y4ZkYLCGQXc4KRrnUcL",
+    "totalShares": 5000,
+    "price": "$10,00,000",
+    "yield": "5.0%",
+    "sharesAvailable": 5000
+  },
+  {
+    "id": "new-1757847285711",
+    "name": "Gurgaon towers",
+    "description": "A beautiful 3 BHK flat ",
+    "location": "Gurugram, India",
+    "imageUrl": "https://cloudflare-ipfs.com/ipfs/QmPJKHCLvHny2QgnEDpBzWTDyYhURMD8kKZMH3ny2fQ7d5",
+    "totalShares": 4000,
+    "price": "$8,00,000",
+    "yield": "5.0%",
+    "sharesAvailable": 4000
+  },
+  {
+    "id": "new-1757846920542",
+    "name": "DLF Tower",
+    "description": "4 BHK Penthouse",
+    "location": "New Delhi, India",
+    "imageUrl": "https://cloudflare-ipfs.com/ipfs/Qmbp5f6gSMzqZgALUEPcRwLz5gtaoqjAUeSWRmHKpK5rnf",
+    "totalShares": 5000,
+    "price": "$5,00,000",
+    "yield": "5.0%",
+    "sharesAvailable": 5000
+  },
+  {
+    "id": "new-1757846720920",
+    "name": "DLF Tower",
+    "description": "4 BHK penthouse",
+    "location": "New Delhi, India",
+    "imageUrl": "https://gateway.pinata.cloud/ipfs/Qmbp5f6gSMzqZgALUEPcRwLz5gtaoqjAUeSWRmHKpK5rnf",
+    "totalShares": 700,
+    "price": "$22,68,000",
+    "yield": "5.0%",
+    "sharesAvailable": 700
+  },
+  {
+    "id": "new-1757845357375",
+    "name": "Vienna house ",
+    "description": "Luxury mansion",
+    "location": "Vienna, Austria",
+    "imageUrl": "https://gateway.pinata.cloud/ipfs/Qmbbnrcf4z2tzd35giazJ2QQPUu6vDTUfDgGHzH1jpbByY",
+    "totalShares": 2000,
+    "price": "$14,00,000",
+    "yield": "5.0%",
+    "sharesAvailable": 2000
+  },
+  {
+    "id": "new-1757845185678",
+    "name": "Manhattan penthouse",
+    "description": "4 BHK apartment ",
+    "location": "new York",
+    "imageUrl": "https://gateway.pinata.cloud/ipfs/QmQFGYjfhw7Aa4g2Hi1PWPtruokrd8ixZysC51kNdyV3EB",
+    "totalShares": 1000,
+    "price": "$5,00,000",
+    "yield": "5.0%",
+    "sharesAvailable": 1000
+  },
   {
     "id": "new-1757845026614",
     "name": "Mumbai Flat ",
@@ -131,6 +232,96 @@
     "yield": "5.0%",
     "sharesAvailable": 100
   },
+  {
+    "id": "new-1757792910780",
+    "name": "Maldives villa ",
+    "description": "a 4 bedroom villa",
+    "location": "Maldives",
+    "imageUrl": "https://gateway.pinata.cloud/ipfs/QmV9F9yXhxWdfJ3PKif2WNU2EGuiy5VskU5NyGnb7CX6uU",
+    "totalShares": 230,
+    "price": "$2,300",
+    "yield": "5.0%",
+    "sharesAvailable": 230
+  },
+  {
+    "id": "new-1757792543802",
+    "name": "goa beach house",
+    "description": "two bed room house ",
+    "location": "Goa",
+    "imageUrl": "https://gateway.pinata.cloud/ipfs/QmUnhHMHnQXWwZnJXwrjEUrK1AqCdBZGR4UwXS6dyuUaGf",
+    "totalShares": 1000,
+    "price": "$1,20,000",
+    "yield": "5.0%",
+    "sharesAvailable": 1000
+  },
+  {
+    "id": "luxury-villa-in-bali",
+    "name": "Luxury Villa in Bali",
+    "location": "Bali, Indonesia",
+    "price": "$2,500,000",
+    "yield": "6.8%",
+    "imageUrl": "/properties/bali.png",
+    "description": "A stunning 5-bedroom villa with an infinity pool overlooking the ocean. Fully furnished and ready for rental.",
+    "totalShares": 10000,
+    "sharesAvailable": 3450
+  },
+  {
+    "id": "penthouse-in-new-york",
+    "name": "Penthouse in New York",
+    "location": "New York, USA",
+    "price": "$5,000,000",
+    "yield": "4.5%",
+    "imageUrl": "/properties/newyork.png",
+    "description": "A luxurious penthouse in the heart of Manhattan with breathtaking city views. Features a private rooftop terrace.",
+    "totalShares": 25000,
+    "sharesAvailable": 11200
+  },
+  {
+    "id": "beachfront-condo-in-miami",
+    "name": "Beachfront Condo in Miami",
+    "location": "Miami, USA",
+    "price": "$1,200,000",
+    "yield": "5.2%",
+    "imageUrl": "/properties/miami.png",
+    "description": "A modern 2-bedroom condo with direct beach access and resort-style amenities.",
+    "totalShares": 5000,
+    "sharesAvailable": 1200
+  },
+  {
+    "id": "chalet-in-the-swiss-alps",
+    "name": "Chalet in the Swiss Alps",
+    "location": "Zermatt, Switzerland",
+    "price": "$3,000,000",
+    "yield": "4.0%",
+    "imageUrl": "/properties/swiss.png",
+    "description": "A cozy ski-in/ski-out chalet with stunning mountain views of the Matterhorn.",
+    "totalShares": 15000,
+    "sharesAvailable": 5500
+  },
+  {
+    "id": "apartment-in-tokyo",
+    "name": "Apartment in Tokyo",
+    "location": "Tokyo, Japan",
+    "price": "$800,000",
+    "yield": "3.5%",
+    "imageUrl": "/properties/tokyo.png",
+    "description": "A stylish apartment in the vibrant Shibuya district, close to transport and amenities.",
+    "totalShares": 4000,
+    "sharesAvailable": 800
+  },
+  {
+    "id": "ranch-in-texas",
+    "name": "Ranch in Texas",
+    "location": "Texas, USA",
+    "price": "$1,500,000",
+    "yield": "2.8%",
+    "imageUrl": "/properties/ranch-texas.png",
+    "description": "A sprawling ranch with over 100 acres of land, perfect for cattle or recreational use.",
+    "totalShares": 7500,
+    "sharesAvailable": 3000
+  }
+]
+,
   {
     "id": "new-1757792910780",
     "name": "Maldives villa ",

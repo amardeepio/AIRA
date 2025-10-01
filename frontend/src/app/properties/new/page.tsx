@@ -21,6 +21,7 @@ import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagm
 import { marketplaceAddress, marketplaceAbi, propertyTokenAddress, propertyTokenAbi } from '@/lib/contracts';
 import { parseEther, decodeEventLog, Log } from 'viem';
 
+
 const locations = [
   'Abu Dhabi, UAE',
   'Accra, Ghana',
@@ -122,6 +123,7 @@ const locations = [
   'Wellington, New Zealand',
   'Zurich, Switzerland',
 ];
+
 
 export default function ListPropertyPage() {
   const [propertyName, setPropertyName] = useState('');
@@ -252,6 +254,7 @@ export default function ListPropertyPage() {
           });
 
           // Step 5: Add property to the database
+
           const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
           await fetch(`${apiUrl}/api/properties/add`, {
             method: 'POST',

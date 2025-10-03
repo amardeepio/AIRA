@@ -31,6 +31,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
+import { GlassCard, GlassCardHeader, GlassCardTitle, GlassCardDescription, GlassCardContent } from "@/components/ui/glass-card";
 
 const chartData = [
   { month: "Jan", value: 110000 },
@@ -52,49 +53,49 @@ export default function DashboardPage() {
   return (
     <AuthGuard>
       <div className="container mx-auto py-8 space-y-8">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <h1 className="text-3xl font-bold drop-shadow-sm">Dashboard</h1>
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Value</CardTitle>
-            <Wallet className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$125,000</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Returns</CardTitle>
-            <TrendingUp className="h-4 w-4 text-green-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-500">+$5,000</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Lifetime Earnings</CardTitle>
-            <Landmark className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$1,200</div>
-            <p className="text-xs text-muted-foreground">from rent</p>
-          </CardContent>
-        </Card>
+        <GlassCard>
+          <GlassCardHeader className="flex flex-row items-center justify-between pb-2">
+            <GlassCardTitle className="text-sm font-medium">Total Value</GlassCardTitle>
+            <Wallet className="h-4 w-4 text-muted-foreground drop-shadow-sm" />
+          </GlassCardHeader>
+          <GlassCardContent>
+            <div className="text-2xl font-bold drop-shadow-sm">$125,000</div>
+          </GlassCardContent>
+        </GlassCard>
+        <GlassCard>
+          <GlassCardHeader className="flex flex-row items-center justify-between pb-2">
+            <GlassCardTitle className="text-sm font-medium">Total Returns</GlassCardTitle>
+            <TrendingUp className="h-4 w-4 text-green-500 drop-shadow-sm" />
+          </GlassCardHeader>
+          <GlassCardContent>
+            <div className="text-2xl font-bold text-green-500 drop-shadow-sm">+$5,000</div>
+          </GlassCardContent>
+        </GlassCard>
+        <GlassCard>
+          <GlassCardHeader className="flex flex-row items-center justify-between pb-2">
+            <GlassCardTitle className="text-sm font-medium">Lifetime Earnings</GlassCardTitle>
+            <Landmark className="h-4 w-4 text-muted-foreground drop-shadow-sm" />
+          </GlassCardHeader>
+          <GlassCardContent>
+            <div className="text-2xl font-bold drop-shadow-sm">$1,200</div>
+            <p className="text-xs text-muted-foreground drop-shadow-sm">from rent</p>
+          </GlassCardContent>
+        </GlassCard>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
           {/* Portfolio Overview Chart */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Portfolio Overview</CardTitle>
-              <CardDescription>Your portfolio value over the last 6 months.</CardDescription>
-            </CardHeader>
-            <CardContent>
+          <GlassCard>
+            <GlassCardHeader>
+              <GlassCardTitle>Portfolio Overview</GlassCardTitle>
+              <GlassCardDescription>Your portfolio value over the last 6 months.</GlassCardDescription>
+            </GlassCardHeader>
+            <GlassCardContent>
               <ChartContainer config={chartConfig} className="h-80 w-full">
                 <BarChart data={chartData} margin={{ left: 12, right: 12 }}>
                   <XAxis
@@ -107,7 +108,7 @@ export default function DashboardPage() {
                     tickLine={false}
                     axisLine={false}
                     tickMargin={8}
-                    tickFormatter={(value) => `$${Number(value) / 1000}k`}
+                    tickFormatter={(value) => `${Number(value) / 1000}k`}
                   />
                   <ChartTooltip
                     cursor={false}
@@ -120,18 +121,18 @@ export default function DashboardPage() {
                   />
                 </BarChart>
               </ChartContainer>
-            </CardContent>
-          </Card>
+            </GlassCardContent>
+          </GlassCard>
 
           {/* My Holdings Table */}
-          <Card>
-            <CardHeader>
-              <CardTitle>My Holdings</CardTitle>
-              <CardDescription>
+          <GlassCard>
+            <GlassCardHeader>
+              <GlassCardTitle>My Holdings</GlassCardTitle>
+              <GlassCardDescription>
                 A list of properties you have invested in.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
+              </GlassCardDescription>
+            </GlassCardHeader>
+            <GlassCardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -156,34 +157,34 @@ export default function DashboardPage() {
                   </TableRow>
                 </TableBody>
               </Table>
-            </CardContent>
-          </Card>
+            </GlassCardContent>
+          </GlassCard>
         </div>
 
         <div className="space-y-8">
           {/* AIRA Score */}
-          <Card>
-            <CardHeader>
-              <CardTitle>AIRA Score</CardTitle>
-              <CardDescription>Your on-chain credit score.</CardDescription>
-            </CardHeader>
-            <CardContent className="text-center">
+          <GlassCard>
+            <GlassCardHeader>
+              <GlassCardTitle>AIRA Score</GlassCardTitle>
+              <GlassCardDescription>Your on-chain credit score.</GlassCardDescription>
+            </GlassCardHeader>
+            <GlassCardContent className="text-center">
               <div className="flex items-center justify-center gap-2 text-5xl font-bold text-primary mb-2">
-                <ShieldCheck className="h-10 w-10" />
-                <span>750</span>
+                <ShieldCheck className="h-10 w-10 drop-shadow-sm" />
+                <span className="drop-shadow-sm">750</span>
               </div>
-              <p className="text-xs text-muted-foreground mb-4">Excellent</p>
-              <Button variant="outline" size="sm">See Factors</Button>
-            </CardContent>
-          </Card>
+              <p className="text-xs text-muted-foreground mb-4 drop-shadow-sm">Excellent</p>
+              <Button variant="outline" size="sm" className="backdrop-blur-sm bg-white/20 hover:bg-white/30 border border-white/30">See Factors</Button>
+            </GlassCardContent>
+          </GlassCard>
 
           {/* Transaction History */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Transaction History</CardTitle>
-              <CardDescription>Recent transactions.</CardDescription>
-            </CardHeader>
-            <CardContent>
+          <GlassCard>
+            <GlassCardHeader>
+              <GlassCardTitle>Transaction History</GlassCardTitle>
+              <GlassCardDescription>Recent transactions.</GlassCardDescription>
+            </GlassCardHeader>
+            <GlassCardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -210,8 +211,8 @@ export default function DashboardPage() {
                   </TableRow>
                 </TableBody>
               </Table>
-            </CardContent>
-          </Card>
+            </GlassCardContent>
+          </GlassCard>
         </div>
       </div>
       </div>

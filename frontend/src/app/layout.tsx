@@ -50,10 +50,12 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={inter.className}>
         <Providers>
-          <Header />
-          <main>{children}</main>
-          <ChatWidget />
-          <Footer />
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <ChatWidget />
+            <Footer />
+          </div>
         </Providers>
         {/* Vanta.js Scripts */}
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" strategy="beforeInteractive" />

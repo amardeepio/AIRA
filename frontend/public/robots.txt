@@ -1,0 +1,9 @@
+# Allow all user agents to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow crawling of specific paths if needed in the future
+# Disallow: /private/
+
+# Point to the sitemap
+Sitemap: https://www.airalabs.xyz/sitemap.xml

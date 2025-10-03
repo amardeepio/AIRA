@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { Providers } from "./providers";
 import Script from "next/script";
 import { ChatWidget } from '@/components/chat/ChatWidget';
@@ -52,6 +53,7 @@ export default function RootLayout({
           <Header />
           <main>{children}</main>
           <ChatWidget />
+          <Footer />
         </Providers>
         {/* Vanta.js Scripts */}
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" strategy="beforeInteractive" />

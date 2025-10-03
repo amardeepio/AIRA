@@ -58,11 +58,15 @@ export default function Home() {
   }, []);
 
   // Animation variants
-    const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
+  const fadeInUp = {
+    initial: { opacity: 0, y: 40 },
     whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, ease: "easeInOut" as const },
-    viewport: { once: true },
+    transition: { 
+      duration: 0.7, 
+      ease: [0.25, 0.1, 0.25, 1.0] as const,
+      delay: 0.05,
+    },
+    viewport: { once: false, amount: 0.3 },
   };
 
   const staggerContainer = {
@@ -70,10 +74,10 @@ export default function Home() {
     whileInView: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
+        staggerChildren: 0.2,
       },
     },
-    viewport: { once: true },
+    viewport: { once: false, amount: 0.3 },
   };
 
   return (
@@ -82,28 +86,47 @@ export default function Home() {
       <div className="flex flex-col relative z-10">
         {/* Hero Section */}
         <section className="flex flex-col items-center justify-center text-center gap-6 py-24 md:py-32">
-          <motion.h1
-            className="text-4xl md:text-5xl font-bold max-w-3xl"
-            {...fadeInUp}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center"
           >
-            The New Way to Own Real Estate
-          </motion.h1>
-          <motion.p
-            className="text-lg text-muted-foreground max-w-xl"
-            {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.2 }}
-          >
-            AIRA makes investing in real estate as simple, liquid, and transparent
-            as trading stocks, powered by AI-driven insights.
-          </motion.p>
-          <motion.div
-            {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.4 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link href="/properties">
-              <Button size="lg">Explore Properties</Button>
-            </Link>
+            <motion.h1
+              className="text-4xl md:text-5xl font-bold max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0] }}
+            >
+              The New Way to Own Real Estate
+            </motion.h1>
+            <motion.p
+              className="text-lg text-muted-foreground max-w-xl mt-4 mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0], delay: 0.1 }}
+            >
+              AIRA makes investing in real estate as simple, liquid, and transparent
+              as trading stocks, powered by AI-driven insights.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0], delay: 0.2 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-6 flex justify-center"
+            >
+              <Link href="/properties" scroll={true}>
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button size="lg" className="transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    Explore Properties
+                  </Button>
+                </motion.div>
+              </Link>
+            </motion.div>
           </motion.div>
         </section>
 
@@ -180,7 +203,12 @@ export default function Home() {
             </motion.div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredProperties.map((property) => (
-                <motion.div key={property.id} variants={fadeInUp}>
+                <motion.div 
+                  key={property.id} 
+                  variants={fadeInUp}
+                  whileHover={{ y: -10 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
                   <PropertyCard {...property} />
                 </motion.div>
               ))}

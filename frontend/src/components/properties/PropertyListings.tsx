@@ -1,10 +1,9 @@
-'use client';
-
 import { useState, useMemo } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PropertyCard } from "@/components/properties/PropertyCard";
 import { type Property } from "@/lib/properties-data";
+import { motion } from "framer-motion";
 
 interface PropertyListingsProps {
   properties: Property[];
@@ -57,7 +56,12 @@ export function PropertyListings({ properties }: PropertyListingsProps) {
 
   return (
     <div>
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-8">
+      <motion.div 
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="flex flex-col md:flex-row gap-4 justify-between items-center mb-8"
+      >
         <Input
           placeholder="Search by name or location..."
           value={searchTerm}
@@ -84,17 +88,37 @@ export function PropertyListings({ properties }: PropertyListingsProps) {
             <option value="yield_desc">Yield: High to Low</option>
           </select>
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {paginatedProperties.map((property) => (
-          <PropertyCard key={property.id} {...property} />
+      </motion.div>
+      
+      <motion.div 
+        layout
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        {paginatedProperties.map((property, index) => (
+          <motion.div
+            key={property.id}
+            layout
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, delay: index * 0.05 }}
+          >
+            <PropertyCard {...property} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
+      
       {paginatedProperties.length > 0 && totalPages > 1 && (
-        <div className="flex items-center justify-center space-x-4 mt-8">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          className="flex items-center justify-center space-x-4 mt-8"
+        >
             <Button 
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
+            className="transition-all duration-300 hover:scale-105"
             >
             Previous
             </Button>
@@ -104,10 +128,11 @@ export function PropertyListings({ properties }: PropertyListingsProps) {
             <Button 
             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
+            className="transition-all duration-300 hover:scale-105"
             >
             Next
             </Button>
-        </div>
+        </motion.div>
       )}
     </div>
   );

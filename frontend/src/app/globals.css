@@ -118,6 +118,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    scroll-behavior: smooth;
   }
 }
 
@@ -125,6 +126,35 @@
   .text-shadow-sm {
     text-shadow: 1px 1px 2px rgb(0 0 0 / 0.7);
   }
+  
+  .text-shadow-md {
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 0.5);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 4px 4px 8px rgb(0 0 0 / 0.3);
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 8px 32px rgba(31, 38, 135, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .glass-effect-dark {
+    backdrop-filter: blur(12px);
+    background: rgba(30, 30, 30, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  }
+  
   .progress-shimmer {
     background-size: 200% 100%;
     background-image: linear-gradient(

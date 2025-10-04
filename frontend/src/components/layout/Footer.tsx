@@ -29,7 +29,7 @@ export function Footer() {
         </div>
         <div className="flex items-center gap-4">
           <p className="text-sm text-muted-foreground">Follow us</p>
-          <Link href="https://t.me/AIRAlabsChannel" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground">
+          <Link href="https://x.com/Airalabs_" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground">
             <XIcon />
           </Link>
           <Link href="https://t.me/AIRAlabsChannel" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground">

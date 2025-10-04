@@ -175,10 +175,21 @@ export default function AdvisorPage() {
                 },
                 body: JSON.stringify({ goal, budget: parseInt(budget) }),
             });
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ message: 'An unknown error occurred' }));
+                throw new Error(errorData.message || 'Failed to get recommendations');
+            }
             const data = await response.json();
             setResults(data);
         } catch (error) {
             console.error("Failed to get recommendations:", error);
+            setResults({
+                portfolioTitle: 'Error',
+                portfolioAnalysis: error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.',
+                riskScore: 'High',
+                riskAnalysis: 'Could not generate recommendations due to an error.',
+                recommendations: [],
+            });
         } finally {
             setProgress(100);
             setTimeout(() => setIsLoading(false), 500);
@@ -271,7 +282,7 @@ export default function AdvisorPage() {
                                         initial="hidden"
                                         animate="show"
                                     >
-                                        {results.recommendations.map(prop => (
+                                        {results.recommendations?.map(prop => (
                                             <RecommendedPropertyCard key={prop.id} property={prop} />
                                         ))}
                                     </motion.div>

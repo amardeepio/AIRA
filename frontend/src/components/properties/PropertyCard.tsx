@@ -45,14 +45,14 @@ export function PropertyCard(property: Property) {
             <div className="flex items-center gap-2">
               <DollarSign size={16} />
               <div>
-                <p className="font-bold text-lg">${price}</p>
+                <p className="font-bold text-lg">{price}</p>
                 <p className="text-sm text-muted-foreground">AIRA Valuation</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <TrendingUp size={16} />
               <div>
-                <p className="font-bold text-lg">{estYield}%</p>
+                <p className="font-bold text-lg">{estYield}</p>
                 <p className="text-sm text-muted-foreground">Est. Yield</p>
               </div>
             </div>
